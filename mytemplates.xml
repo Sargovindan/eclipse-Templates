@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<templates>
+	<template autoinsert="true" context="java" deleted="false" description="Create a new generic ArrayList" enabled="true" name="list">${:import(java.util.List,
+  java.util.ArrayList)} 
+List&lt;${argType}&gt; ${newName} = new ArrayList&lt;${argType}&gt;(); </template>
+	<template autoinsert="true" context="java" deleted="false" description="Logger setup" enabled="true" name="logger">${:import(org.apache.commons.logging.Log,
+	org.apache.commons.logging.LogFactory)} 
+
+private static final Log log = LogFactory.getLog(${enclosing_type}.class);</template>
+	<template autoinsert="true" context="java" deleted="false" description="Log with specified level" enabled="true" name="loglevel">${:import(java.util.logging.Level)} 
+if(${log:var(java.util.logging.Logger)}.isLoggable(Level.${LEVEL})) {
+   ${log:var(java.util.logging.Logger)}.${level}(${});
+}
+${cursor}</template>
+	<template autoinsert="true" context="java" deleted="false" description="Create a new generic HashMap" enabled="true" name="map">${:import(java.util.Map,
+  java.util.HashMap)} 
+Map&lt;${argType},${argType}&gt; ${newName} = new HashMap&lt;${argType},${argType}&gt;(); </template>
+	<template autoinsert="true" context="java" deleted="false" description="Iterate through a map, print the keys and values" enabled="true" name="map-iterate">${:import(java.util.Iterator,  
+           java.util.Map)}
+for (Iterator&lt;Map.Entry&lt;${type},${type2}&gt;&gt; it = ${collection}.entrySet().iterator(); it.hasNext();) {
+    Map.Entry&lt;${type},${type2}&gt; entry = it.next();
+    ${type} key = entry.getKey();
+    ${type2} value = entry.getValue();
+    // do something with the key and the value
+}
+	</template>
+	<template autoinsert="true" context="java" deleted="false" description="Parse a time using SimpleDateFormat" enabled="true" name="parsetime">${:import(java.text.DateFormat,
+		  java.text.ParseException,
+		  java.text.SimpleDateFormat,
+		  java.util.Date)}
+try {
+    DateFormat formatter = new SimpleDateFormat("hh.mm.ss a");
+    Date date = (Date)formatter.parse("02.36.33 PM");
+} catch (ParseException e) {
+	throw e;
+}
+	</template>
+	<template autoinsert="true" context="java" deleted="false" description="Read a file line by line" enabled="true" name="readfile">${:import(java.io.BufferedReader,  
+           java.io.FileNotFoundException,  
+           java.io.FileReader,  
+           java.io.IOException)}  
+ BufferedReader in = null;  
+ try {  
+    in = new BufferedReader(new FileReader(${fileName}));  
+    String line;  
+    while ((line = in.readLine()) != null) {  
+       ${process}  
+    }  
+ }  
+ catch (FileNotFoundException e) {  
+    logger.error(e) ;  
+ }  
+ catch (IOException e) {  
+    logger.error(e) ;  
+ } finally {  
+    if(in != null) in.close();  
+ }  
+ ${cursor}
+	</template>
+	<template autoinsert="true" context="java" deleted="false" description="Log and rethrow a caught exception" enabled="true" name="rethrow">log.error("${cursor}");
+throw ${exception_variable_name};</template>
+	<template autoinsert="true" context="java" deleted="false" description="Print execution time of a block of code" enabled="true" name="time">long start = System.currentTimeMillis();
+//TODO: Insert code here
+${cursor}
+long end = System.currentTimeMillis();
+System.out.println("Operation took "+(end-start)+ "ms");</template>
+	<template autoinsert="true" context="java" deleted="false" description="Create periodic Timer" enabled="true" name="timer">${:import(java.util.Timer,
+		  java.util.TimerTask)} 
+int delay = 5000;   // delay for 5 sec.
+int period = 1000;  // repeat every sec.
+Timer timer = new Timer();
+
+timer.scheduleAtFixedRate(new TimerTask() {
+        public void run() {
+            //TODO: Insert code to execute here
+			${cursor}
+        }
+}, delay, period);</template>
+	<template autoinsert="true" context="java" deleted="false" description="Write a String to a file" enabled="true" name="writefile">${:import(java.io.BufferedWriter,
+		  java.io.FileWriter,
+		  java.io.IOException)} 
+try {
+    BufferedWriter out = new BufferedWriter(new FileWriter(${cursor}"fileName"));
+    out.write("aString");
+    out.close();
+} catch (IOException e) {
+	throw e;	
+}
+	</template>
+</templates>

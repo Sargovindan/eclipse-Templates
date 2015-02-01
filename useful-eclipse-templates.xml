@@ -1,0 +1,15 @@
+<templates><template autoinsert="true" context="java" deleted="false" description="init method for junit 4" enabled="true" name="bb">${before:import('org.junit.Before')}${initMocks:importStatic('org.mockito.MockitoAnnotations.*')} 
+@${:newType(org.junit.Before)}
+public void initBeforeTest() throws Exception {
+	initMocks(this);
+	${cursor}
+}</template><template autoinsert="true" context="java" deleted="false" description="Junit 4 for testing exception" enabled="true" name="te">${:import('org.junit.Test')}
+@${annotation:newType(org.junit.Test)}(expected=${expectionname}.class)
+public void should_throw_${testname}_when() throws Exception {
+	${cursor}
+}</template><template autoinsert="true" context="java-members" deleted="false" description="test method (JUnit 4)" enabled="true" name="tt">${staticImport:importStatic('org.junit.Assert.*')}${staticImport1:importStatic('org.mockito.Mockito.*')}${staticImport2:importStatic('org.mockito.MockitoAnnotations.Mock')}
+@${:newType(org.junit.Test)}
+public void should_${testname}() throws Exception {
+	${cursor}
+}</template>
+<template autoinsert="true" context="java" deleted="false" description="Import log4j and create Logger" enabled="true" name="lg">${:import(org.apache.log4j.Logger)}private static final Logger log = Logger.getLogger(${enclosing_type}.class);</template></templates>
